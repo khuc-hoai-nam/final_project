@@ -1,0 +1,63 @@
+{% extends "layout.html" %} {% block main %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-4">
+      <h2 class="text-center mb-4">ĐĂNG KÝ TÀI KHOẢN</h2>
+      <form
+        action="/register"
+        method="post"
+        class="shadow p-4 bg-white rounded"
+      >
+        <div class="mb-3">
+          <input
+            class="form-control"
+            name="username"
+            placeholder="Tên đăng nhập"
+            type="text"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <input
+            class="form-control"
+            name="email"
+            placeholder="Email"
+            type="email"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <input
+            class="form-control"
+            name="phone"
+            placeholder="Số điện thoại"
+            type="text"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <input
+            class="form-control"
+            name="password"
+            placeholder="Mật khẩu"
+            type="password"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <input
+            class="form-control"
+            name="confirmation"
+            placeholder="Nhập lại mật khẩu"
+            type="password"
+            required
+          />
+        </div>
+        <div class="d-grid">
+          <button class="btn btn-primary" type="submit">Đăng ký</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

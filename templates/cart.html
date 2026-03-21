@@ -1,0 +1,73 @@
+{% extends "layout.html" %} {% block main %}
+<div class="container mt-5">
+  <h2 class="mb-4 text-uppercase fw-bold">Giỏ hàng của bạn 🛒</h2>
+
+  {% if cart_items %}
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <table class="table table-hover align-middle">
+        <thead class="table-dark">
+          <tr>
+            <th>Sản phẩm</th>
+            <th class="text-center">Số lượng</th>
+            <th class="text-end">Đơn giá</th>
+            <th class="text-end">Thành tiền</th>
+            <th class="text-center">Thao tác</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in cart_items %}
+          <tr>
+            <td>{{ item.name }}</td> 
+            <td class="text-center">
+              <form action="/cart/update/{{ item.id }}/remove" method="post" style="display: inline">
+                <button type="submit" class="btn btn-sm btn-outline-secondary">-</button>
+              </form>
+              {{ item.quantity }}
+              <form action="/cart/update/{{ item.id }}/add" method="post" style="display: inline">
+                <button type="submit" class="btn btn-sm btn-outline-secondary">+</button>
+              </form>
+            </td>
+            <td class="text-end">{{ "{:,.0f}".format(item.price) }}đ</td>
+            <td class="text-end">
+              {{ "{:,.0f}".format(item.price * item.quantity) }}đ
+            </td>
+
+            <td class="text-center">
+              <form action="/cart/remove" method="post" style="display: inline">
+                <input type="hidden" name="product_id" value="{{ item.id }}" />
+                <button type="submit" class="btn btn-sm btn-outline-danger">
+                  Xóa
+                </button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="3" class="text-end fw-bold">Tổng cộng:</td>
+            <td class="text-end text-danger fw-bold fs-5">
+              {{ "{:,.0f}".format(total) }}đ
+            </td>
+            <td></td>
+          </tr>
+        </tfoot>
+      </table>
+
+      <div class="text-end mt-3">
+        <form action="/checkout" method="post">
+          <button type="submit" class="btn btn-success btn-lg">
+            THANH TOÁN NGAY
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% else %}
+  <div class="alert alert-info text-center">
+    Giỏ hàng đang trống. <a href="/">Tiếp tục mua sắm</a>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

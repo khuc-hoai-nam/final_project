@@ -1,0 +1,65 @@
+{% extends "layout.html" %} {% block main %}
+<div
+  class="p-5 mb-4 bg-light rounded-3 shadow-sm"
+  style="
+    background:
+      linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+      url(&quot;https://images.unsplash.com/photo-1556817411-31ae72fa3ea0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80&quot;);
+    background-size: cover;
+    color: white;
+  "
+>
+  <div class="container-fluid py-5 text-center">
+    <h1 class="display-5 fw-bold">KHƠI NIỀM ĐAM MÊ THỂ THAO</h1>
+    <p class="fs-4">Khám phá bộ sưu tập mới nhất tại Nam Sport ngay hôm nay.</p>
+    <a href="/new" class="btn btn-warning btn-lg">XEM HÀNG MỚI</a>
+  </div>
+</div>
+
+<h2 class="text-center mb-4">SẢN PHẨM NỔI BẬT</h2>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  {% for product in products %}
+  <div class="col">
+    <div class="card h-100 shadow-sm border-0 position-relative card-product">
+      <a href="/product/{{ product.id }}">
+        <img
+          src="{{ product.image if product.image else 'https://via.placeholder.com/300x250' }}"
+          class="card-img-top"
+          alt="{{ product.name }}"
+          style="height: 250px; object-fit: cover"
+        />
+      </a>
+
+      <div class="card-body text-center">
+        <h5 class="card-title text-uppercase fw-bold">
+          <a
+            href="/product/{{ product.id }}"
+            class="text-decoration-none text-dark"
+          >
+            {{ product.name }}
+          </a>
+        </h5>
+
+        <p class="card-text text-muted small">{{ product.category }}</p>
+        <p class="card-text text-danger fs-5 fw-bold">
+          {{ "{:,.0f}".format(product.price) }} VNĐ
+        </p>
+
+        <div class="d-grid mt-3" style="position: relative; z-index: 2">
+          <form action="/cart/add" method="post">
+            <input type="hidden" name="product_id" value="{{product.id}}" />
+            <button type="submit" class="btn btn-dark w-100">MUA NGAY</button>
+          </form>
+        </div>
+      </div>
+
+      <a
+        href="/product/{{ product.id }}"
+        class="stretched-link"
+        style="z-index: 1"
+      ></a>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

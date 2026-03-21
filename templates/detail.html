@@ -1,0 +1,58 @@
+{% extends "layout.html" %} {% block main %}
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6">
+      <img
+        src="https://via.placeholder.com/600x400"
+        class="img-fluid rounded shadow"
+        alt="{{ product.name }}"
+      />
+    </div>
+
+    <div class="col-md-6">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+          <li class="breadcrumb-item active">{{ product.category }}</li>
+        </ol>
+      </nav>
+
+      <h1 class="display-5 fw-bold text-uppercase">{{ product.name }}</h1>
+      <h3 class="text-danger my-3">
+        {{ "{:,.0f}".format(product.price) }} VNĐ
+      </h3>
+
+      <hr />
+
+      <p><strong>Giới tính:</strong> {{ product.gender }}</p>
+      <p><strong>Màu sắc:</strong> {{ product.color }}</p>
+      <p><strong>Chất liệu:</strong> {{ product.material }}</p>
+
+      <div class="mb-3">
+        <label class="form-label fw-bold">Chọn Kích cỡ (Size):</label>
+        <select class="form-select w-25">
+          <option>{{ product.size }}</option>
+        </select>
+      </div>
+
+      <p class="text-success">
+        <i class="bi bi-check-circle"></i> Còn lại: {{ product.stock_quantity }}
+        sản phẩm trong kho
+      </p>
+
+      <form action="/cart/add" method="post" class="mt-4">
+        <input type="hidden" name="product_id" value="{{product.id}}" />
+
+        <div class="d-grid gap-2 d-md-block">
+          <button type="submit" class="btn btn-dark btn-lg px-5">
+            THÊM VÀO GIỎ
+          </button>
+          <button type="button" class="btn btn-outline-secondary btn-lg">
+            YÊU THÍCH ❤️
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

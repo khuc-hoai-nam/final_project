@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <h2 class="text-center mb-4">ĐĂNG NHẬP</h2>
+            <form action="/login" method="post" class="shadow p-4 bg-white rounded border-top border-warning border-4">
+                <div class="mb-3">
+                    <label class="form-label">Tên đăng nhập</label>
+                    <input class="form-control" name="username" type="text" required autofocus>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Mật khẩu</label>
+                    <input class="form-control" name="password" type="password" required>
+                </div>
+                <div class="d-grid">
+                    <button class="btn btn-dark" type="submit">Vào cửa hàng</button>
+                </div>
+                <p class="text-center mt-3 small">Chưa có tài khoản? <a href="/register">Đăng ký ngay</a></p>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

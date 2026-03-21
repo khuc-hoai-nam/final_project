@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4 text-uppercase fw-bold">THỜI TRANG NAM </h2>
+    
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for product in products %}
+        <div class="col">
+            <div class="card h-100 shadow-sm border-0 position-relative">
+                <a href="/product/{{ product.id }}">
+                    <img src="{{ product.image if product.image else 'https://via.placeholder.com/300x250' }}" 
+                         class="card-img-top" alt="{{ product.name }}" style="height: 250px; object-fit: cover;">
+                </a>
+                <div class="card-body text-center">
+                    <h5 class="card-title text-uppercase fw-bold">{{ product.name }}</h5>
+                    <p class="card-text text-danger fs-5 fw-bold">{{ "{:,.0f}".format(product.price) }}đ</p>
+                    <p class="text-muted small">Còn lại: {{ product.stock }}</p>
+                    
+                    <div class="d-grid mt-3" style="position: relative; z-index: 2;">
+                        <form action="/cart/add" method="post">
+                            <input type="hidden" name="product_id" value="{{product.id}}" />
+                            <button type="submit" class="btn btn-dark w-100">MUA NGAY</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% if not products %}
+    <div class="alert alert-info text-center">Hiện chưa có sản phẩm nào trong mục này.</div>
+    {% endif %}
+</div>
+{% endblock %}

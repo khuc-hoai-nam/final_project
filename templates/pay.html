@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<div class="container mt-5 text-center">
+    <div class="card shadow-lg p-4 mx-auto" style="max-width: 500px;">
+        <h2 class="fw-bold text-primary mb-4">QUÉT MÃ THANH TOÁN</h2>
+        <p class="lead">Số tiền cần thanh toán: <strong class="text-danger">{{ "{:,.0f}".format(total) }}đ</strong></p>
+        
+        <div class="my-4">
+            <img src="https://img.vietqr.io/image/TCB-871892986868-compact2.jpg?amount={{ total }}&addInfo=Nam%20Thanh%20Toan%20Don%20Hang" 
+                 class="img-fluid border p-2" alt="Mã QR Thanh Toán">
+        </div>
+
+        <div class="alert alert-warning">
+            <small>Sau khi chuyển khoản thành công, hãy bấm nút xác nhận bên dưới.</small>
+        </div>
+
+        <form action="/payment_confirm" method="post">
+            <button type="submit" class="btn btn-success btn-lg w-100">TÔI ĐÃ CHUYỂN KHOẢN</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

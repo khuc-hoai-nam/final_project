@@ -1,0 +1,49 @@
+/* Font chữ thể thao mạnh mẽ */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700;900&display=swap');
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa; /* Màu nền xám nhạt cho trang nhã */
+}
+
+/* Tùy chỉnh Navbar */
+.navbar {
+    border-bottom: 3px solid #ff4500; /* Đường kẻ cam đậm chất thể thao */
+    padding: 1rem 0;
+}
+
+.navbar-brand {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: #ff4500 !important; /* Tên shop màu cam nổi bật */
+}
+
+/* Hiệu ứng khi di chuột vào Menu */
+.nav-link {
+    font-weight: 600;
+    transition: 0.3s;
+    text-transform: uppercase; /* Chữ in hoa cho khỏe khoắn */
+}
+
+.nav-link:hover {
+    color: #ff4500 !important;
+    transform: translateY(-2px); /* Nhảy nhẹ lên trên khi di chuột */
+}
+
+/* Tùy chỉnh Footer */
+footer {
+    background-color: #212529;
+    color: white;
+}
+
+/* Hiệu ứng phóng to nhẹ và đổ bóng đậm hơn khi chỉ chuột vào ô sản phẩm */
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: translateY(-10px); /* Nhấc ô lên một chút */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15) !important;
+}
