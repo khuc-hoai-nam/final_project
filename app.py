@@ -1,13 +1,12 @@
 from cs50 import SQL
 from flask import Flask, render_template, request, redirect, session
 from werkzeug.security import generate_password_hash, check_password_hash
-# (Đảm bảo dòng này nằm trên cùng, cùng chỗ với mấy dòng import Flask)
 
 app = Flask(__name__)
 
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
-app.secret_key = "nam_sport_bi_mat_123" # Đặt một chuỗi bất kỳ
+app.secret_key = "nam_sport_bi_mat_123" 
 
 db = SQL("sqlite:///project.db")
 
@@ -41,7 +40,7 @@ def register():
            username, hash_pw, email, phone)
             return render_template("login.html", message="Đăng ký thành công! Vui lòng đăng nhập.")
         except Exception as e:
-            # Dòng này sẽ in lỗi thật ra Terminal để bạn soi
+            # Dòng này sẽ in lỗi thật ra Terminal
             print(f"Lỗi SQL: {e}")
             return f"Lỗi: {e}", 400
     return render_template("register.html")
@@ -92,8 +91,6 @@ def cart_add():
 
     # 3. KIỂM TRA: Nếu số lượng định mua (đã có + 1) > tồn kho thì chặn lại
     if qty_in_cart + 1 > stock_available:
-        # Thay vì hiện lỗi chữ đen, Nam có thể dùng flash message (nếu đã cài) 
-        # hoặc tạm thời return thông báo lỗi này
         return f"Lỗi: Kho chỉ còn {stock_available} sản phẩm, bạn không thể thêm nữa!", 400
 
     # 4. Nếu vượt qua kiểm tra thì mới tiến hành thêm/cập nhật giỏ hàng
@@ -195,24 +192,18 @@ def payment_confirm():
 
 @app.route("/nam")
 def products_nam():
-    # Giả sử Nam dùng cột 'category' để phân loại
-    # Nam có thể sửa 'Nam' thành 'male' tùy theo dữ liệu Nam nhập trong DB
     products = db.execute("SELECT * FROM products WHERE gender = 'Nam' AND stock > 0")
     
     return render_template("nam.html", products=products)
 
 @app.route("/nu")
 def products_nu():
-    # Giả sử Nam dùng cột 'category' để phân loại
-    # Nam có thể sửa 'Nam' thành 'male' tùy theo dữ liệu Nam nhập trong DB
     products = db.execute("SELECT * FROM products WHERE gender = 'Nữ' AND stock > 0")
     
     return render_template("nu.html", products=products)
 
 @app.route("/phu-kien")
 def products_phu_kien():
-    # Giả sử Nam dùng cột 'category' để phân loại
-    # Nam có thể sửa 'Nam' thành 'male' tùy theo dữ liệu Nam nhập trong DB
     products = db.execute("SELECT * FROM products WHERE gender != 'Nữ' AND gender != 'Nam' AND stock > 0")
     
     return render_template("phu-kien.html", products=products)
